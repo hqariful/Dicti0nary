@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="/search">
+        <input name="search" type="text">
+        <button type="submit" >submit</button>
+    </form>
+</div>
+
+
+{% if all %}
+    <div class="container">
+        {% if already_saved %}
+        <a href="http://127.0.0.1:5000/delete/{{all[0]['word']}}">Delete</a>
+        {% else %}
+        <a href="http://127.0.0.1:5000/save/{{all[0]['word']}}"><button>save</button></a>
+        {% endif %}
+        
+        <audio controls src="{{ all[0]['phonetics'][0]['audio'] }}"></audio>
+        {% for i in all[0]['meanings']: %}
+        <h1 class="text-success">{{ all[0]['word'] }} <small class='text-primary'><i>({{ i['partOfSpeech'] }})</i></small>  </h1><h2></h2>
+        <h4>Definition of <i>{{ all[0]['word'] }}</i>:</h4>
+            {% for j in i['definitions'] %}
+            <ul>
+                <div class="">
+                    <li><h3 class="">{{ j['definition'] }}</h3></li>
+
+                    {% if j["example"] %}
+                    <h4>examples: {{ j['example'] }}</h4>
+                    {% endif %}
+
+                    {% if j["synonyms"] %}
+                    <h4>synonyms: 
+                        {% for w in j['synonyms'] %}
+                            <a href="http://127.0.0.1:5000/link/{{w}}">{{w}},</a>
+                        {% endfor %}</h4>
+                    {% endif %}
+                    
+                    {% if j["antonyms"] %}
+                    <h4>antonyms: 
+                        {% for z in j['antonyms'] %}
+                            <a href="http://127.0.0.1:5000/link/{{z}}">{{z}}, </a>
+                        {% endfor %}</h4>
+                    {% endif %}
+                    
+                </div>
+            </ul>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+{% endif %}
+
+{% endblock %}
