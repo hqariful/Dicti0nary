@@ -12,9 +12,9 @@
 {% if all %}
     <div class="container">
         {% if already_saved %}
-        <a href="http://127.0.0.1:5000/delete/{{all[0]['word']}}">Delete</a>
+        <a href="/delete/{{all[0]['word']}}">Delete</a>
         {% else %}
-        <a href="http://127.0.0.1:5000/save/{{all[0]['word']}}"><button>save</button></a>
+        <a href="/save/{{all[0]['word']}}"><button>save</button></a>
         {% endif %}
         
         <audio controls src="{{ all[0]['phonetics'][0]['audio'] }}"></audio>
@@ -33,14 +33,14 @@
                     {% if j["synonyms"] %}
                     <h4>synonyms: 
                         {% for w in j['synonyms'] %}
-                            <a href="http://127.0.0.1:5000/link/{{w}}">{{w}},</a>
+                            <a href="/link/{{w}}">{{w}},</a>
                         {% endfor %}</h4>
                     {% endif %}
                     
                     {% if j["antonyms"] %}
                     <h4>antonyms: 
                         {% for z in j['antonyms'] %}
-                            <a href="http://127.0.0.1:5000/link/{{z}}">{{z}}, </a>
+                            <a href="/link/{{z}}">{{z}}, </a>
                         {% endfor %}</h4>
                     {% endif %}
                     
