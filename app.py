@@ -27,12 +27,14 @@ def is_in_saved(word):
     else:
         return True
 
+
 #Home route
 @app.route('/')
 @app.route('/search',methods=['GET','POST'])
 def search():
     if request.method == 'GET':
-        return render_template('home.html')
+        twords = db.session.query(saved).count()
+        return render_template('home.html',twords=twords)
     elif request.method == 'POST':
         all = wordMeaning(request.form['search'])
         if all is None:
@@ -60,13 +62,13 @@ def delete(word):
 @app.route('/list')
 def list():
     all = saved.query.all()
-    return render_template('list.html',all=all)
+    return render_template('list.html',all=all,title="Word List")
 
 #Route word from hyperlink
 @app.route('/link/<word>')
 def link(word):
     all = wordMeaning(word)
-    return render_template('home.html',all = all,already_saved=is_in_saved(all[0]['word']))
+    return render_template('home.html',title="WordDiary - "+word,all = all,already_saved=is_in_saved(all[0]['word']))
 
 #running the app
 if __name__ == '__main__':

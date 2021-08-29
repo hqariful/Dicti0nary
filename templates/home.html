@@ -18,12 +18,12 @@
         {% endif %}
         
         {% if all[0]['phonetics'] %}
-            <audio controls src="{{ all[0]['phonetics'][0]['audio'] }}"></audio>
+            <input id="aud" hidden value="{{ all[0]['phonetics'][0]['audio'] }}"></input>
         {% endif %}
         {% for i in all[0]['meanings']: %}
         <h1 class="text-success">{{ all[0]['word'] }} <small class='text-primary'>
             {% if all[0]['phonetic'] %}
-                <i class="text-secondary">[{{ all[0]['phonetic'] }}]</i>
+                <a onclick="play()"><i class="bi bi-volume-up"></i><i class="text-secondary">[{{ all[0]['phonetic'] }}]</i></a>
             {% endif %}
             <i>({{ i['partOfSpeech'] }})</i></small>  </h1>
         <h4>Definition of <i>{{ all[0]['word'] }}</i>:</h4>
@@ -39,14 +39,14 @@
                     {% if j["synonyms"] %}
                     <h4>synonyms: 
                         {% for w in j['synonyms'] %}
-                            <a href="/link/{{w}}">{{w}},</a>
+                            <a href="#" onclick="hyperlink('{{w}}')">{{w}},</a>
                         {% endfor %}</h4>
                     {% endif %}
                     
                     {% if j["antonyms"] %}
                     <h4>antonyms: 
                         {% for z in j['antonyms'] %}
-                            <a href="/link/{{z}}">{{z}}, </a>
+                            <a href="#" onclick="hyperlink('{{z}}')">{{z}},</a>
                         {% endfor %}</h4>
                     {% endif %}
                     
@@ -56,6 +56,10 @@
         {% endfor %}
     </div>
 
+{% else %}
+<h1>Total Words : {{twords}}</h1>    
+
 {% endif %}
+
 
 {% endblock %}
