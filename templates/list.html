@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+
 <table class="table table-striped">
     <thead>
       <tr>
@@ -15,7 +16,7 @@
         <th scope="row">{{word.id}}</th>
         <td><a href="/link/{{word.word}}">{{word.word}}</a></td>
         <td>{{word.date_added}}</td>
-        <td><a href="/delete/{{word.word}}">Delete</a></td>
+        <td><a href="/delete/yes/{{word.word}}">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>

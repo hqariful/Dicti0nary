@@ -1,12 +1,14 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, flash
 from datetime import datetime
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.wrappers import response
 from details import wordMeaning
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///dict.db"
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 db = SQLAlchemy(app)
 
 #database
@@ -48,15 +50,21 @@ def save(word):
     new_word = saved(word=word)
     db.session.add(new_word)
     db.session.commit()
-    return redirect('/list')
+    flash('Word Saved',"success")
+    return redirect('/link/'+word)
+
 
 #deleting from saved word
-@app.route('/delete/<word>')
-def delete(word):
+@app.route('/delete/<here>/<word>')
+def delete(word,here):
     got_word = saved.query.filter_by(word=word).first()
     db.session.delete(got_word)
     db.session.commit()
-    return redirect('/list')
+    flash('word deleted','warning')
+    if here == 'yes':  
+        return redirect('/list')
+    else:
+        return redirect('/link/'+word)
 
 #list of all saved word
 @app.route('/list')

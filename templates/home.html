@@ -1,18 +1,16 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container">
-    <form method="POST" action="/search">
-        <input name="search" type="text">
-        <button type="submit" >submit</button>
-    </form>
-</div>
+
+
+
+
 
 
 {% if all %}
     <div class="container">
         {% if already_saved %}
-        <a href="/delete/{{all[0]['word']}}">Delete</a>
+        <a href="/delete/no/{{all[0]['word']}}">Delete</a>
         {% else %}
         <a href="/save/{{all[0]['word']}}"><button>save</button></a>
         {% endif %}

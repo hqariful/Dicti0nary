@@ -25,9 +25,25 @@
       <li class="nav-item">
         <a class="nav-link active" href="/list">List</a>
     </ul>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert-{{category}}" role="alert">
+            {{message}}
+          </div>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    
+    <div class="container">
+      <form method="POST" action="/search">
+          <input name="search" type="text">
+          <button type="submit" >submit</button>
+      </form>
+    </div>
 
     {% block content %}{% endblock %}
-
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
