@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, flash
+from flask import Flask, request, render_template, redirect, flash, session
 from datetime import datetime
 from flask.helpers import url_for
 from flask_sqlalchemy import SQLAlchemy
@@ -35,13 +35,20 @@ def is_in_saved(word):
 @app.route('/search',methods=['GET','POST'])
 def search():
     if request.method == 'GET':
+        session['pword'] = None
         twords = db.session.query(saved).count()
         return render_template('home.html',twords=twords)
     elif request.method == 'POST':
         all = wordMeaning(request.form['search'])
         if all is None:
-            return render_template('sorry.html')
+            flash('The word is not in the dictionary','danger')
+            if session['pword'] is None:
+                return redirect('/')
+            else:
+                pword = session['pword']
+                return redirect('/link/'+pword)
         else:
+            session['pword'] = request.form['search']
             return render_template('home.html',all = all,already_saved=is_in_saved(all[0]['word']))
 
 #saving new word
@@ -76,6 +83,7 @@ def list():
 @app.route('/link/<word>')
 def link(word):
     all = wordMeaning(word)
+    session['pword'] = word
     return render_template('home.html',title="WordDiary - "+word,all = all,already_saved=is_in_saved(all[0]['word']))
 
 #running the app
