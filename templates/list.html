@@ -1,24 +1,30 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block nav %}
+<div class="topnav">
+  <a href="/home">Home</a>
+  <a href="/list">Lists</a>
+  <a href="/setting">setting</a>
+  <a href="/logout">Logout</a>
+</div>
+{% endblock %} {% block content %}
 
 <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Word</th>
-        <th scope="col">Date Saved</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for word in all %}
-      <tr>
-        <th scope="row">{{word.id}}</th>
-        <td><a href="/link/{{word.word}}">{{word.word}}</a></td>
-        <td>{{word.date_added}}</td>
-        <td><a href="/delete/yes/{{word.word}}">Delete</a></td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Word</th>
+      <th scope="col">Date Saved</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for word in all %}
+    <tr>
+      <th scope="row">{{word.word}}</th>
+      <td><a href="/link/{{word.word}}">{{word.word}}</a></td>
+      <td>{{word.time_posted}}</td>
+      <td><a href="/delete/yes/{{word.word}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

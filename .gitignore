@@ -1,2 +1,5 @@
 __pycache__
 *.db
+venv
+test.py
+flask_session

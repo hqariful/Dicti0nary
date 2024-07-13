@@ -1,0 +1,20 @@
+{% extends "layout.html" %} {% block nav %}
+<div class="topnav">
+  <a class="active" href="/home">Home</a>
+</div>
+{% endblock %} {% block content %}
+<h2>Register Here</h2>
+
+<h3 style="color: red">{{ err_msg }}</h3>
+
+<form action="/register" method="post">
+  <label for="usr">User Name</label>
+  <input type="text" name="usr" id="usr" />
+  <label for="pwd">Password</label>
+  <input type="password" name="pwd" id="pwd" />
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email" />
+  <input type="submit" />
+</form>
+<h3>Already have an account <a href="/login">Login</a></h3>
+{% endblock %}

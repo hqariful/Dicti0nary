@@ -1,0 +1,13 @@
+{% extends "layout.html" %} {% block nav %}
+<div class="topnav">
+  <a href="/home">Home</a>
+  <a href="/list">Lists</a>
+  <a href="/setting">setting</a>
+  <a href="/logout">Logout</a>
+</div>
+{% endblock %} {% block content %} Profile setting of {{ usr.username }} {% if own:%}
+<form action="/profile/delete/{{usr.username}}" method="post">
+  <label for="delete">"Delete Account"</label>
+  <input type="submit" />
+</form>
+{% endif %} {% endblock %}
