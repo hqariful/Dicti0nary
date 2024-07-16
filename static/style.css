@@ -1,0 +1,46 @@
+/* login register */
+.lg-reg {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.lg-reg div {
+  padding: 5px;
+}
+
+/* search */
+#search {
+  text-align: center;
+  background-color: #360982;
+  padding: 10px;
+}
+
+.topnav {
+  text-align: center;
+  padding: 10px;
+  background-color: #360982;
+  display: flex;
+  justify-content: space-around;
+}
+
+.topnav a {
+  border-radius: 10px;
+  padding: 5px;
+  color: #ff9797;
+}
+
+footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  text-align: center;
+  background-color: #360982;
+  color: #ff9797;
+  width: 100%;
+  padding: 10px;
+}
+
+footer a {
+  color: antiquewhite;
+}

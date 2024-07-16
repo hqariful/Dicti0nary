@@ -4,6 +4,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
@@ -15,10 +19,14 @@
   </head>
   <body>
     {% block nav %}{% endblock %} {% if session["user_id"] %}
-    <form action="/home" method="post">
+    <form action="/home" method="post" id="search">
       <input type="text" name="search" />
       <input type="submit" />
     </form>
     {% endif %} {% block content %} {% endblock %}
+    <footer>
+      Developed by: <a href="https://hqariful.github.io/" style="text-decoration: none">Ariful Hoque</a><br />
+      Thanks <a href="https://dictionaryapi.dev/">Free API Dictionary</a> for the resource
+    </footer>
   </body>
 </html>
