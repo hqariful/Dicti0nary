@@ -1,8 +1,16 @@
 /* login register */
+body {
+  background-color: aliceblue;
+}
+
 .lg-reg {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  justify-content: center;
+  max-width: fit-content;
+  margin-inline: auto;
+  border: 2px solid #360982;
+  padding: 10px;
 }
 
 .lg-reg div {
@@ -43,4 +51,10 @@ footer {
 
 footer a {
   color: antiquewhite;
+}
+
+#intro {
+  text-align: center;
+  font-size: large;
+  padding: 20px;
 }

@@ -3,9 +3,10 @@
   <a class="active" href="/home">Home</a>
 </div>
 {% endblock %} {% block content %}
-<h2>Login</h2>
+
 <h3 style="color: red">{{ err_msg }}</h3>
 <form action="/login" method="post" class="lg-reg">
+  <h2>Login</h2>
   <div>
     <label for="usr">User Name</label>
     <input type="text" name="usr" id="usr" />
