@@ -14,15 +14,6 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-#database
-# class saved(ss.Model):
-#     id = db.Column(db.Integer,primary_key=True)
-#     word = db.Column(db.String(30),nullable=False)
-#     date_added = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
-
-#     def __repr__(self):
-#         return f"(word: {self.word}, date_added:{self.date_added})"
-
 
 def is_in_saved(word):
     u1 = ss.query(User).filter(User.id==session["user_id"]).first()
@@ -79,7 +70,6 @@ def home(msg=""):
         if request.method == 'GET':
             usr = ss.query(User).filter(User.id == session["user_id"]).first()
             words = ss.query(Words).filter(Words.user_id == session["user_id"]).all()
-            print(f"session = {session["user_id"]},user = {usr},words {words},tword = {len(words)}")
             session['pword'] = None
             return render_template('home.html',usr =usr,twords=len(words))
         
@@ -107,26 +97,6 @@ def setting():
     else:
         return redirect(url_for("login"))    
 
-# #Home route
-# @app.route('/')
-# @app.route('/search',methods=['GET','POST'])
-# def search():
-    # if request.method == 'GET':
-    #     session['pword'] = None
-    #     twords = ss.session.query(saved).count()
-    #     return render_template('home.html',twords=twords)
-#     elif request.method == 'POST':
-#         all = wordMeaning(request.form['search'])
-#         if all is None:
-#             flash('The word is not in the dictionary','danger')
-#             if session['pword'] is None:
-#                 return redirect('/')
-#             else:
-#                 pword = session['pword']
-#                 return redirect('/link/'+pword)
-#         else:
-#             session['pword'] = request.form['search']
-#             return render_template('home.html',all = all,already_saved=is_in_saved(all[0]['word']))
 
 #saving new word
 @app.route('/save/<word>')
