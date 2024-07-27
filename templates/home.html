@@ -1,22 +1,15 @@
 {% extends "layout.html" %} 
-{% block nav %}
-<div class="topnav">
-    <a href="/home">Home</a>
-    <a href="/list">Lists</a>
-    <a href="/setting">setting</a>
-    <a href="/logout">Logout</a>
-</div>
-{% endblock %}
 {% block content %}
-<h3 style="color: red">{{ msg }}</h3>
+<h3 style="color: red;text-align: center;">{{ msg }}</h3>
 {% if all %}
     <div class="container">
-        {% if already_saved %}
-        <a href="/delete/no/{{all[0]['word']}}">Delete</a>
-        {% else %}
-        <a href="/save/{{all[0]['word']}}"><button>save</button></a>
+        {% if session.user_id %}
+            {% if already_saved %}
+            <a href="/delete/no/{{all[0]['word']}}">Delete</a>
+            {% else %}
+            <a href="/save/{{all[0]['word']}}"><button>save</button></a>
+            {% endif %}
         {% endif %}
-        
         {% if all[0]['phonetics'] %}
             <input id="aud" hidden value="{{ all[0]['phonetics'][0]['audio'] }}"></input>
         {% endif %}
@@ -57,7 +50,8 @@
     </div>
 
 {% else %}
-<center><h1>Total Words : {{twords}}</h1></center>  
-
+{% if session.user_id %}
+    <center><h1>Total Words : {{twords}}</h1></center>  
+{% endif %}
 {% endif %}
 {% endblock %}

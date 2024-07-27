@@ -66,6 +66,22 @@ def logout():
 
 @app.route("/home",methods=['GET','POST'])
 def home(msg=""):
+    if request.method == 'POST':
+        all = wordMeaning(request.form['search'])
+        print(all)
+        if all is None:
+            msg = ('The word is not in the dictionary','warning')
+            if session['pword'] is None:
+                return render_template('home.html',msg=msg[0])
+            else:
+                pword = session['pword']
+                return redirect('/link/'+pword)
+        else:
+            session['pword'] = request.form['search']
+            if "user_id" in session:
+                return render_template('home.html',all = all,already_saved=is_in_saved(all[0]['word']))
+            else:
+                return render_template('home.html',all = all)
     if "user_id" in session:
         if request.method == 'GET':
             usr = ss.query(User).filter(User.id == session["user_id"]).first()
@@ -73,19 +89,6 @@ def home(msg=""):
             session['pword'] = None
             return render_template('home.html',usr =usr,twords=len(words))
         
-        elif request.method == 'POST':
-            all = wordMeaning(request.form['search'])
-            print(all)
-            if all is None:
-                msg = ('The word is not in the dictionary','warning')
-                if session['pword'] is None:
-                    return redirect('/',msg=msg[0])
-                else:
-                    pword = session['pword']
-                    return redirect('/link/'+pword)
-            else:
-                session['pword'] = request.form['search']
-                return render_template('home.html',all = all,already_saved=is_in_saved(all[0]['word']))
     else:
         return redirect(url_for("login"))
     
@@ -132,8 +135,11 @@ def list():
 def link(word):
     all = wordMeaning(word)
     session['pword'] = word
-    print(is_in_saved(all[0]['word']))
-    return render_template('home.html',title="WordDiary - "+word,all = all,already_saved=is_in_saved(all[0]['word']))
+    if "user_id" in session:
+        print(is_in_saved(all[0]['word']))
+        return render_template('home.html',title="WordDiary - "+word,all = all,already_saved=is_in_saved(all[0]['word']))
+    else:
+        return render_template('home.html',title = "WordDiary - "+word,all=all)
 
 #running the app
 if __name__ == '__main__':

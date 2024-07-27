@@ -4,8 +4,7 @@
 </div>
 {% endblock %} {% block content %}
 <div id="intro">
-  Never forget the word you learn <br />Use this website to save words you learn. <br />The website uses opensource api to fetch meaning for the words. <br />To search and save for word register for
-  free now
+  Using This Website search and save the words you learn<br />The website uses opensource api to fetch meaning for the words. <br />To search and save for word register for free now
 </div>
 
 <h3 style="color: red">{{ err_msg }}</h3>
@@ -25,6 +24,6 @@
     <input type="email" name="email" id="email" />
   </div>
   <input type="submit" />
+  <h3>Already have an account <a href="/login">Login</a></h3>
 </form>
-<h3>Already have an account <a href="/login">Login</a></h3>
 {% endblock %}

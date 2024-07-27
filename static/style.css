@@ -1,6 +1,12 @@
 /* login register */
 body {
   background-color: aliceblue;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
 }
 
 .lg-reg {
@@ -39,7 +45,7 @@ body {
 }
 
 footer {
-  position: fixed;
+  position: relative;
   left: 0px;
   bottom: 0px;
   text-align: center;
